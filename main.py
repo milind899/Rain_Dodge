@@ -3,10 +3,15 @@ import random
 import time
 
 pygame.font.init()
+pygame.mixer.init()
 
 WIDTH, HEIGHT = 1000, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Rain Dodge')
+
+pygame.mixer.music.load("music.mp3")
+pygame.mixer.music.set_volume(1.0)
+pygame.mixer.music.play(-1)
 
 BG = pygame.transform.scale(pygame.image.load('bg.png'), (WIDTH, HEIGHT))
 
@@ -32,11 +37,12 @@ def main():
     run = True
 
     player = pygame.Rect(200, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
-
     clock = pygame.time.Clock()
-
     start_time = time.time()
     elapsed_time = 0
+
+    star_add_increment = 2000
+    start_count = 0
 
     while run:
         clock.tick(60)
