@@ -21,7 +21,7 @@ PLAYER_HEIGHT = 60
 PLAYER_VEL = 5
 STAR_WIDTH = 10
 STAR_HEIGHT = 20
-STAR_VEL = 3
+STAR_VEL = 4
 
 FONT = pygame.font.SysFont("comics an", 30)
 
@@ -57,7 +57,7 @@ def main():
         elapsed_time = time.time() - start_time
 
         if star_count > star_add_increment:
-            for _ in range(3):
+            for _ in range(8):
                 star_x = random.randint(0, WIDTH - STAR_WIDTH)
                 star = pygame.Rect(star_x, -STAR_HEIGHT, STAR_WIDTH, STAR_HEIGHT)
                 stars.append(star)
@@ -85,6 +85,12 @@ def main():
                 hit = True
                 break
 
+        if hit:
+            lost_text = FONT.render("You Lost!", 1, "white")
+            WIN.blit(lost_text, (WIDTH/2 - lost_text.get_width()/2, HEIGHT/2 - lost_text.get_height()/2))
+            pygame.display.update()
+            pygame.time.delay(6000)
+            break
         draw(player, elapsed_time, stars)
 
     pygame.quit()
